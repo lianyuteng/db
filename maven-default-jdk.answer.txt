@@ -1,0 +1,33 @@
+有相应的jar包却说找不到类， 是jar包的版本不对应，应改为相同的版本。
+
+
+
+
+
+
+Cannot change version of project facet Dynamic Web Module to 3.0.
+
+
+
+去修改.setting文件下的	org.eclipse.wst.common.project.facet.core.xml  修改web版本
+
+
+
+
+
+每次maven update  jdk都是1.5的解决办法，
+
+<build>
+		<finalName>xiao</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>

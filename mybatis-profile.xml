@@ -1,0 +1,51 @@
+   mapper  
+
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.manager.data.StudentMapper">  
+  
+    <resultMap type="StudentEntity" id="studentResultMap">  
+        <id property="studentID" column="STUDENT_ID"/>  
+        <result property="studentName" column="STUDENT_NAME"/>  
+        <result property="studentSex" column="STUDENT_SEX"/>  
+        <result property="studentBirthday" column="STUDENT_BIRTHDAY"/>  
+    </resultMap>  
+      
+    <!-- 查询学生，根据id -->  
+    <select id="getStudent" parameterType="String" resultType="StudentEntity" resultMap="studentResultMap">  
+        <![CDATA[ 
+            SELECT * from STUDENT_TBL ST 
+                WHERE ST.STUDENT_ID = #{studentID}  
+        ]]>   
+    </select>  
+      
+    <!-- 查询学生列表 -->  
+    <select id="getStudentAll"  resultType="com.manager.data.model.StudentEntity" resultMap="studentResultMap">  
+        <![CDATA[ 
+            SELECT * from STUDENT_TBL 
+        ]]>   
+    </select>  
+      
+</mapper> 
+
+
+
+    config 
+
+
+在src/main/resource中创建MyBatis配置文件：mybatis-config.xml。
+typeAliases标签：给类起一个别名。com.manager.data.model.StudentEntity类，可以使用StudentEntity代替。
+Mappers标签：加载MyBatis中实体类的SQL映射语句文件。
+
+
+
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+    <typeAliases>  
+        <typeAlias alias="StudentEntity" type="com.manager.data.model.StudentEntity"/>  
+    </typeAliases>  
+    <mappers>  
+        <mapper resource="com/manager/data/maps/StudentMapper.xml" />  
+    </mappers>  
+</configuration> 
